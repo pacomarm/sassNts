@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { types } from "../types/types"
 import {firebase, googleAuthProvider} from '../firebase/config'
 import { finishLoading, startLoading } from './ui';
@@ -10,7 +11,12 @@ export const startLoginEmailPassword = (email: any, password: any) => {
                 dispatch( login( user.uid, user.displayName))
             })
             .catch( (e:Error) => {
-                console.log(e)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Authentication Error :(',
+                    text: e.message,
+                    footer: '<a href="">What is love?</a>'
+                })
             })
             .finally( () => {
                 dispatch( finishLoading() )
@@ -26,7 +32,12 @@ export const startRegisterWEmailPassName = (email: any, password: any, name: any
                 dispatch( login(user.uid, user.displayName) );            
             } )
             .catch( (e:Error) => {
-                console.log(e)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Authentication Error :(',
+                    text: e.message,
+                    footer: '<a href="">What is love?</a>'
+                })
             })
     }
     
