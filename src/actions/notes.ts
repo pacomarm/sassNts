@@ -24,3 +24,9 @@ export const activeNote = (id:any, note:any) => ({
     }
 })
 
+export const setNotes = (notes:any) => ({
+    type: types.notesLoad,
+    payload: notes
+})
+
+
