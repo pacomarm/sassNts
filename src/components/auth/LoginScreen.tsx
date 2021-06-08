@@ -28,7 +28,7 @@ export const LoginScreen = () => {
     return (
         <>
             <h2 className="auth__title">Login</h2>
-            <form>
+            <form className="animate__animated animate__fadeIn animate__faster">
                 <input 
                     type="text" 
                     placeholder="email"
