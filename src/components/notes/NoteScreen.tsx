@@ -50,7 +50,7 @@ export const NoteScreen = () => {
                     note.url &&
                     <div className="notes__image">
                         <img 
-                            src="https://picsum.photos/750" alt="img" 
+                            src={note.url} alt="img" 
                         />
                     </div>
                 }
