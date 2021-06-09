@@ -1,40 +1,53 @@
-import cloudinary from 'cloudinary'
-import { fileUpload } from "../../helpers/fileUpload";
+import cloudinary from 'cloudinary';
+
+import { fileUpload } from '../../helpers/fileUpload';
+
 
 
 cloudinary.config({ 
-  cloud_name: 'swaggyp', 
-  api_key: '994676733563621', 
-  api_secret: 'GnJzKP1fC5YardWGQliGt5MYeE4' 
+    cloud_name: 'dx0pryfzn', 
+    api_key: '422916932349318', 
+    api_secret: 'gM_vs-URpSAyA3xV-PsoTg8xF3M' 
 });
 
-describe('tests in fileUpload', () => {
+describe('Pruebas en fileUpload', () => {
     
 
-    test('should load a file and return url', async() => {
-        
-        const img = await fetch('https://pbs.twimg.com/profile_images/598915526321143808/FU7wYEwD_400x400.jpg')
-        const blob = await img.blob();
-        
-        const file = new File([blob], 'foto.jpg') 
-        const url = await fileUpload(file);
+
+    test('debe de cargar un archivo y retornar el URL', async(done) => {
+
+        const resp = await fetch('https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png');
+        const blob = await resp.blob();
+
+        const file = new File([blob], 'foto.png');
+        const url = await fileUpload( file );
 
         expect( typeof url ).toBe('string');
 
+        // Borrar imagen por ID
         const segments = url.split('/');
-        const imageId = segments[segments.length - 1].replace('.jpg', '')
+        const imageId = segments[ segments.length - 1 ].replace('.png','');
 
-        await cloudinary.v2.api.delete_resources(imageId, {}, () => {
-            console.log('');
+        cloudinary.v2.api.delete_resources( imageId, {}, ()=> {
+            done();
         });
+        
     })
 
-    test('should return error', async() => {
-                
-        const file = new File([], 'foto.jpg') 
-        const url = await fileUpload(file);
-        expect( url ).toBe(null)
+
+    test('debe de retornar un error', async() => {
+
+        const file = new File([], 'foto.png');
+        const url = await fileUpload( file );
+
+        expect( url ).toBe( null );
+
+        
     })
     
+    
+
 
 })
+
+

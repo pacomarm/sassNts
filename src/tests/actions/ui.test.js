@@ -1,37 +1,38 @@
-import { finishLoading, removeError, setError, startLoading } from "../../actions/ui"
-import { types } from "../../types/types";
+import { setError, removeError, startLoading, finishLoading } from '../../actions/ui';
+import { types } from '../../types/types';
 
-describe('tests in UI actions', () => {
-    
-    test('all actions should work', () => {
-        const action = setError('Hello');
-        expect(action).toEqual({
+
+
+describe('Pruebas en ui-actions', () => {
+
+    test('todas las acciones deben de funcionar', () => {
+        
+        const action = setError('HELP!!!!');
+
+        expect( action ).toEqual({
             type: types.uiSetError,
-            payload: 'Hello'
-        })
+            payload: 'HELP!!!!'
+        });
 
-        const removeErroraction = removeError();
-        expect(removeErroraction).toEqual({
-            type: types.uiRemoveError,
-        })
+        const removeErrorAction = removeError();
+        const startLoadingAction = startLoading();
+        const finishLoadingAction = finishLoading();
 
-        const startLoadingaction = startLoading();
-        expect(startLoadingaction).toEqual({
-            type: types.uiStartLoading,
-        })
-        const finishLoadingaction = finishLoading();
-        expect(finishLoadingaction).toEqual({
-            type: types.uiFinishLoading,
-        })
-    })
 
-    test('all actions should work', () => {
-        const action = setError('Hello');
-        expect(action).toEqual({
-            type: types.uiSetError,
-            payload: 'Hello'
-        })
+        expect(removeErrorAction).toEqual({
+            type: types.uiRemoveError
+        });
+
+        expect(startLoadingAction).toEqual({
+            type: types.uiStartLoading
+        });
+
+        expect(finishLoadingAction).toEqual({
+            type: types.uiFinishLoading
+        });
+        
+
     })
     
-
+    
 })
